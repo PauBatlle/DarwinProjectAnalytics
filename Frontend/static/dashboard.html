@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>Game Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dashboard_files/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard_files/dashboard.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="dashboard.html">
+					General Statistics
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="game.html">
+					Games
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="player.html">
+					Players
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+					Reports
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              </a>
+            </h6>
+
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">General Statistics</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                This week
+              </button>
+            </div>
+          </div>
+		  
+		<strong><p>Last played games:</p></strong>
+          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+          <div id="chart_div"></div>
+		  <br>
+		  <div id="table_id">
+			<table class="table">
+			  <thead class="thead-dark">
+				<tr>
+				  <th scope="col">#</th>
+				  <th scope="col">Event</th>
+				  <th scope="col">Position</th>
+				  <th scope="col">Score</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <th scope="row">1</th>
+				  <td>Game 1</td>
+				  <td>8</td>
+				  <td>0.3</td>
+				</tr>
+				<tr>
+				  <th scope="row">2</th>
+				  <td>Game 2</td>
+				  <td>7</td>
+				  <td>0.5</td>
+				</tr>
+				<tr>
+				  <th scope="row">3</th>
+				  <td>Game 3</td>
+				  <td>4</td>
+				  <td>0.65</td>
+				</tr>
+				<tr>
+				  <th scope="row">4</th>
+				  <td>Game 4</td>
+				  <td>1</td>
+				  <td>0.9</td>
+				</t>
+				<tr>
+				  <th scope="row">5</th>
+				  <td>Game 5</td>
+				  <td>2</td>
+				  <td>0.75</td>
+				</tr>
+			  </tbody>
+			</table>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dashboard_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="dashboard_files/popper.js"></script>
+    <script src="dashboard_files/bootstrap.js"></script>
+
+    <!-- Icons -->
+    <script src="dashboard_files/feather.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="dashboard_files/Chart.js"></script>
+<script>
+google.charts.load('current', {packages: ['corechart', 'line']});
+google.charts.setOnLoadCallback(drawCurveTypes);
+
+function drawCurveTypes() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'X');
+      data.addColumn('number', 'Position');
+      data.addColumn('number', 'Score');
+
+      data.addRows([
+        [0, 8, 3],    [1, 7, 5],   [2, 4, 6.5],   [3, 1, 9],   [4, 2, 7.5]
+      ]);
+
+      var options = {
+        hAxis: { textPosition: 'none' },
+		vAxes: {0: {logScale: false},
+				1: {logScale: false, maxValue: 200}},
+        series: {
+          1: {curveType: 'function'}
+        },
+        legend: {position: 'bottom'}
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+</script>
+
+	<script>
+		var canvas = document.getElementsByTagName('canvas')[0];
+		canvas.width  = 10;
+		canvas.height = 2;
+	
+		var url_string = window.location.href;
+		var url = new URL(url_string);
+		var player = url.searchParams.get("player");
+		
+		$(".h2").html(player+" - General Statistics")
+		
+		var sessionids = []
+		$.when(
+			d3.csv("main_menu2.csv", function(datum) {
+					
+				if (datum.playerguid == player){
+					var found = sessionids.find(function(element) {
+						return element.sessionid == datum.sessionid;
+					});
+					
+					if (found == null){
+						sessionids.push(datum.sessionid);
+					}
+				}
+			})
+		).done(function(res)
+		{
+
+			console.log("Done");
+		});
+		
+	</script>
+</body>
+</html>

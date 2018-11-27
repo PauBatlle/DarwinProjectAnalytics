@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://getbootstrap.com/docs/4.1/examples/sign-in/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./index_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./index_files/signin.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="dashboard_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" action="dashboard.html" method="GET">
+      <img class="mb-4" src="logo.jpg" alt="" width="150" height="150">
+      <h1 class="h3 mb-3 font-weight-normal">Select a player</h1>
+      <div class="form-group col-md-12">
+      <select class="form-control" id="player" name="player">
+        <option selected>Choose...</option>
+        <option>...</option>
+      </select>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Check statistics</button>
+      <!--<p class="mt-5 mb-3 text-muted">© 2017-2018</p>-->
+    </form>
+ <script>
+var data = []
+
+$.when(
+	d3.csv("main_menu2.csv", function(datum) {
+			
+		var found = data.find(function(element) {
+			return element.playerguid == datum.playerguid;
+		});
+		
+		if (found == null){
+			data.push(datum);
+		}
+	})
+).done(function(res)
+{
+	for (i = 0; i < 10; ++i){
+		if (i == 0){
+			$("#player").html("<option selected>"+data[i].playerguid+"</option>");
+		}
+		else
+		{
+			$("#player").append("<option>"+data[i].playerguid+"</option>");
+		}
+	}
+});
+ 
+ </script>
+
+</body></html>

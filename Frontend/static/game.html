@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>Game Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dashboard_files/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard_files/dashboard.css" rel="stylesheet">
+  <style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+					General Statistics
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="game.html">
+					Games
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="player.html">
+					Players
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+					Reports
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              </a>
+            </h6>
+
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Games Analysis</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                This week
+              </button>
+            </div>
+          </div>
+          <!--<canvas id="canvas" width="800" height="700"></canvas>-->
+			<div id="videos" style="text-align: center">
+			<h1 class="h4">Players' movements during the game:</h1>
+			<video width="320" height="240" controls>
+				  <source src="Epic_dades.mp4" type="video/mp4" autoplay>
+				Your browser does not support the video tag.
+				</video><br>
+			<h1 class="h4">Encounters:</h1>
+			<video width="320" height="240" controls>
+				  <source src="Epic_dades2.mp4" type="video/mp4" autoplay>
+				Your browser does not support the video tag.
+				</video><br>
+			<h1 class="h4">Voronoi Diagram:</h1>
+			<video width="320" height="240" controls>
+				  <source src="Epic_dades3.mp4" type="video/mp4" autoplay>
+				Your browser does not support the video tag.
+				</video><br>
+			<h1 class="h4">Late Game Voronoi:</h1>
+			<video width="320" height="240" controls>
+				  <source src="Epic_dades4.mp4" type="video/mp4" autoplay>
+				Your browser does not support the video tag.
+				</video>
+			</div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dashboard_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="dashboard_files/popper.js"></script>
+    <script src="dashboard_files/bootstrap.js"></script>
+
+    <!-- Icons -->
+    <script src="dashboard_files/feather.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+<script>
+const SIDE_LENGTH = 105
+const HORIZONTAL_OFFSET = SIDE_LENGTH
+const HORIZONTAL_START = -77940 // Map X min coordinate
+const HORIZONTAL_END = 78080 // Map X max coordinate
+const HORIZONTAL_CLAMP = 650
+const VERTICAL_START = -75040 // Map Y min coordinate
+const VERTICAL_END = 75060 // Map Y max coordinate
+const HEXAGON_ANGLE = 0.523598776 // 30 degrees in radians
+const VERTICAL_OFFSET = -Math.sin(HEXAGON_ANGLE) * SIDE_LENGTH
+const VERTICAL_CLAMP = 500 // 700
+
+const hexHeight = Math.sin(HEXAGON_ANGLE) * SIDE_LENGTH
+const hexRadius = Math.cos(HEXAGON_ANGLE) * SIDE_LENGTH
+const hexRectangleHeight = SIDE_LENGTH + 2 * hexHeight
+const hexRectangleWidth = 2 * hexRadius
+
+var canvas = document.querySelector('#canvas').getContext('2d');
+
+//canvas.strokeStyle = '#CCCCCC'
+canvas.setLineDash([15, 15])
+canvas.lineWidth = 1
+
+const drawHexagon = (canvasContext, x, y) => {
+	canvasContext.beginPath()
+	canvasContext.moveTo(x + hexRadius, y)
+	canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight)
+	canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight + SIDE_LENGTH)
+	canvasContext.lineTo(x + hexRadius, y + hexRectangleHeight)
+	canvasContext.lineTo(x, y + SIDE_LENGTH + hexHeight)
+	canvasContext.lineTo(x, y + hexHeight)
+	canvasContext.closePath()
+	canvasContext.stroke()
+}
+
+for (let i = 0; i < 2; ++i) {
+    // draw first row
+    drawHexagon(
+        canvas,
+        i * hexRectangleWidth + hexRadius + HORIZONTAL_OFFSET,
+        SIDE_LENGTH + hexHeight + VERTICAL_OFFSET
+    )
+}
+for (let i = 0; i < 3; ++i) {
+    // draw second row
+    drawHexagon(
+        canvas,
+        i * hexRectangleWidth + HORIZONTAL_OFFSET,
+        2 * (SIDE_LENGTH + hexHeight) + VERTICAL_OFFSET
+    )
+}
+for (let i = 0; i < 2; ++i) {
+    // draw last row
+    drawHexagon(
+        canvas,
+        i * hexRectangleWidth + hexRadius + HORIZONTAL_OFFSET,
+        3 * (SIDE_LENGTH + hexHeight) + VERTICAL_OFFSET
+    )
+}
+
+const scaleWidth = d3.scaleLinear().domain([HORIZONTAL_START, HORIZONTAL_END]).range([HORIZONTAL_OFFSET, HORIZONTAL_CLAMP])
+const scaleHeight = d3.scaleLinear().domain([VERTICAL_START, VERTICAL_END]).range([-VERTICAL_OFFSET / 2 + SIDE_LENGTH, VERTICAL_CLAMP]).clamp(true)
+
+
+//var canvas2 = document.querySelector('#canply').getContext('2d');
+
+var datab = []
+var datai = []
+var datap = []
+var ib = 0
+var ii = 0
+var ip = 0
+
+var countb = 0
+var counti = 0
+var countp = 0
+
+function draw () {
+	canvas.fillStyle = "rgba(255, 0, 0, 0.05)"
+	canvas.beginPath()
+	canvas.arc(
+		scaleWidth(datab[countb%ib].posX),
+		scaleHeight(datab[countb%ib].posY),
+		3,
+		0,
+		2 * Math.PI
+	)
+	countb = countb + 1;
+	canvas.fill()
+	
+	canvas.fillStyle = "rgba(0, 255, 0, 0.05)"
+	canvas.beginPath()
+	canvas.arc(
+		scaleWidth(datai[counti%ii].posX),
+		scaleHeight(datai[counti%ii].posY),
+		3,
+		0,
+		2 * Math.PI
+	)
+	counti = counti + 1;
+	canvas.fill()
+	
+	canvas.fillStyle = "rgba(0, 0, 255, 0.05)"
+	canvas.beginPath()
+	canvas.arc(
+		scaleWidth(datap[countp%ip].posX),
+		scaleHeight(datap[countp%ip].posY),
+		3,
+		0,
+		2 * Math.PI
+	)
+	countp = countp + 1;
+	canvas.fill()
+	window.requestAnimationFrame(draw);
+}
+
+$.when(
+d3.csv("ramon3.csv", function(datum) {
+	if(datum.playerguid == "Beginner"){
+		datab.push(datum)
+		ib = ib + 1
+	} else if (datum.playerguid == "Intermediate") {
+		datai.push(datum)
+		ii = ii + 1
+	} else if (datum.playerguid == "Pro") {
+		datap.push(datum)
+		ip = ip + 1
+	}
+})
+).done(function(res)
+{
+console.log("Done");
+window.requestAnimationFrame(draw);
+});
+
+</script>
+</body>
+</html>

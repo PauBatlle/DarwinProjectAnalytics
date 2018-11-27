@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<head>
+<title>Canvas Test</title>
+</head>
+<body>
+<canvas id="canvas" width="800" height="700"></canvas>
+<!--<canvas id="canply" width="800" height="700" style="position: 'absolute'; left: 0"></canvas>-->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+const SIDE_LENGTH = 105
+const HORIZONTAL_OFFSET = SIDE_LENGTH
+const HORIZONTAL_START = -77940 // Map X min coordinate
+const HORIZONTAL_END = 78080 // Map X max coordinate
+const HORIZONTAL_CLAMP = 650
+const VERTICAL_START = -75040 // Map Y min coordinate
+const VERTICAL_END = 75060 // Map Y max coordinate
+const HEXAGON_ANGLE = 0.523598776 // 30 degrees in radians
+const VERTICAL_OFFSET = -Math.sin(HEXAGON_ANGLE) * SIDE_LENGTH
+const VERTICAL_CLAMP = 500 // 700
+
+const hexHeight = Math.sin(HEXAGON_ANGLE) * SIDE_LENGTH
+const hexRadius = Math.cos(HEXAGON_ANGLE) * SIDE_LENGTH
+const hexRectangleHeight = SIDE_LENGTH + 2 * hexHeight
+const hexRectangleWidth = 2 * hexRadius
+
+var canvas = document.querySelector('#canvas').getContext('2d');
+
+//canvas.strokeStyle = '#CCCCCC'
+canvas.setLineDash([15, 15])
+canvas.lineWidth = 1
+
+const drawHexagon = (canvasContext, x, y) => {
+	canvasContext.beginPath()
+	canvasContext.moveTo(x + hexRadius, y)
+	canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight)
+	canvasContext.lineTo(x + hexRectangleWidth, y + hexHeight + SIDE_LENGTH)
+	canvasContext.lineTo(x + hexRadius, y + hexRectangleHeight)
+	canvasContext.lineTo(x, y + SIDE_LENGTH + hexHeight)
+	canvasContext.lineTo(x, y + hexHeight)
+	canvasContext.closePath()
+	canvasContext.stroke()
+}
+
+for (let i = 0; i < 2; ++i) {
+    // draw first row
+    drawHexagon(
+        canvas,
+        i * hexRectangleWidth + hexRadius + HORIZONTAL_OFFSET,
+        SIDE_LENGTH + hexHeight + VERTICAL_OFFSET
+    )
+}
+for (let i = 0; i < 3; ++i) {
+    // draw second row
+    drawHexagon(
+        canvas,
+        i * hexRectangleWidth + HORIZONTAL_OFFSET,
+        2 * (SIDE_LENGTH + hexHeight) + VERTICAL_OFFSET
+    )
+}
+for (let i = 0; i < 2; ++i) {
+    // draw last row
+    drawHexagon(
+        canvas,
+        i * hexRectangleWidth + hexRadius + HORIZONTAL_OFFSET,
+        3 * (SIDE_LENGTH + hexHeight) + VERTICAL_OFFSET
+    )
+}
+
+const scaleWidth = d3.scaleLinear().domain([HORIZONTAL_START, HORIZONTAL_END]).range([HORIZONTAL_OFFSET, HORIZONTAL_CLAMP])
+const scaleHeight = d3.scaleLinear().domain([VERTICAL_START, VERTICAL_END]).range([-VERTICAL_OFFSET / 2 + SIDE_LENGTH, VERTICAL_CLAMP]).clamp(true)
+
+
+//var canvas2 = document.querySelector('#canply').getContext('2d');
+
+var data = []
+d3.csv("ramon.csv", function(datum) {
+
+	if(datum.playerguid == "Lori_Ross")
+	{
+		console.log([datum.posY, datum.posX])
+		console.log([scaleHeight(datum.posY), scaleWidth(datum.posX)])
+		canvas.fillStyle = d3.rgb("steelblue", 0.05)
+		canvas.beginPath()
+		canvas.arc(
+			scaleWidth(datum.posX),
+			scaleHeight(datum.posY),
+			3,
+			0,
+			2 * Math.PI
+		)
+		
+		canvas.fill()
+		data.push(datum);
+	}
+	//console.log(datum);
+});
+
+</script>
+</body>
+</html>

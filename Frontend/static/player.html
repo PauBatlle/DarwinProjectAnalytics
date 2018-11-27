@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
+
+    <title>Game Dashboard</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dashboard_files/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="dashboard_files/dashboard.css" rel="stylesheet">
+  <style type="text/css">/* Chart.js */
+@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="Chart.bundle.js"></script>
+  <body>
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" href="dashboard.html">
+					General Statistics
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="game.html">
+					Games
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="player.html">
+					Players
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+					Reports
+                </a>
+              </li>
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+              </a>
+            </h6>
+
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4"><div style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;" class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Player Analysis</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                This week
+              </button>
+            </div>
+          </div>
+          <!--<canvas id="canvas" width="800" height="700"></canvas>-->
+		  <div id="buttons" style="text-align: center">
+		  <button id="pmatrix" class="btn btn-secondary"><h1 class="h6">Performance Matrix</h1></button>
+		  <button id="pstyle" class="btn btn-secondary"><h1 class="h6">Player Style</h1></button>
+		  <button id="mover" class="btn btn-secondary"><h1 class="h6">Strengths & Weaknesses (beginner player) </h1></button>
+		  <button id="sandw" class="btn btn-secondary"><h1 class="h6">Strengths & Weaknesses (pro player) </h1></button>
+		  </div>
+		  <hr>
+		  <p><br>
+		  <div id="content">
+		  </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dashboard_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="dashboard_files/popper.js"></script>
+    <script src="dashboard_files/bootstrap.js"></script>
+    <link type="text/css" rel="Stylesheet" href="jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxbulletchart.js"></script>
+    <script type="text/javascript" src="jqwidgets/jqxtooltip.js"></script>
+    <!-- Icons -->
+    <script src="dashboard_files/feather.js"></script>
+    <script>
+      feather.replace()
+    </script>
+
+    <!-- Graphs -->
+    <script src="dashboard_files/Chart.js"></script>
+	<script>
+	  //radar
+	  
+	$( "#pmatrix" ).click(function() {
+		$("#content").html("<canvas id=\"radarChart\"></canvas>");
+	  
+	var datasetValue = [];
+	var bgColors = ['rgba(255, 0, 0, .1)', 'rgba(255, 255, 0, .1)', 'rgba(0, 255, 255, .1)', 'rgba(0, 0, 255, .1)', 'rgba(255, 0, 255, .1)',
+'rgba(128, 128, 128, .1)', 'rgba(128, 255, 0, .1)', 'rgba(0, 0, 0, .1)', 'rgba(255, 128, 0, .1)', 'rgba(127, 0, 255, .1)', 'rgba(0, 102, 0, .1)'];
+	
+	var limit = 3;
+	$.when(
+		d3.csv("spider2.csv", function(datum, index) {
+			if (index < limit){
+				datasetValue[index] = {
+					  backgroundColor: bgColors[index],
+					  borderColor: [
+						'rgba(200, 99, 132, .7)',
+					  ],
+					  borderWidth: 2,
+					fillColor: 'rgba(220,220,220,0.5)',
+					strokeColor :'rgba(220,220,220,1)',
+					title : datum.Name,
+					label : datum.Name,
+					data : [datum.OffRating, datum.DefRating, datum['Backstab rating'], datum['Back defense rating'], datum['Electronics Control'], datum.Accuracy]
+				}
+			}
+		})
+	).done(function(res)
+	{
+		  var ctxR = document.getElementById("radarChart").getContext('2d');
+		  var myRadarChart = new Chart(ctxR, {
+			type: 'radar',
+			data: {
+			  labels: ["OffRating", "DefRating", "Backstab rating", "Back defense rating", "Electronics Control", "Accuracy"],
+			  datasets: datasetValue
+			},
+			options: {
+			  responsive: true,
+				labels: {
+					// This more specific font property overrides the global property
+					defaultFontSize: 18
+				}
+			}
+		});
+	});
+	});
+	
+	$( "#pstyle" ).click(function() {
+		var limit = 1;
+		var thedata = [];
+		var usr;
+		$.when(
+			d3.csv("spider2.csv", function(datum, index) {
+				if (index < limit){
+					usr = datum.Name;
+					thedata = [datum.Risk, datum.Greediness, datum['Altitude Control'], datum['Opponent proximity']];
+					console.log(thedata);
+				}
+			})
+		).done(function(res)
+		{
+		$("#content").html("<h1 class=\"h5\">Seeing info for player <i>"+usr+":</i></h1><br><br><canvas id=\"bar-chart-horizontal\" width=\"400\" height=\"225\"></canvas>");
+		new Chart(document.getElementById("bar-chart-horizontal"), {
+			type: 'horizontalBar',
+			data: {
+			  labels: ["Risk", "Greediness", "Altitude Control", "Opponent proximity"],
+			  datasets: [
+				{
+				  label: "Skill score",
+				  backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+				  data: thedata
+				}
+			  ]
+			},
+			options: {
+			  legend: { display: false },
+			  title: {
+				display: true,
+				text: ''
+			  },
+			scales: {
+					xAxes: [{
+						display: true,
+						ticks: {
+							suggestedMin: -1,    // minimum will be 0, unless there is a lower value.
+							// OR //
+							//beginAtZero: true   // minimum value will be 0.
+						}
+					}]
+				}
+			}
+		});
+	});
+    });
+	
+	var thedata = [];
+	$( "#mover" ).click(function() {
+		var limit = 1;
+		var usr;
+		$.when(
+			d3.csv("info.csv", function(datum, index) {
+				if (index < limit){
+					usr = datum.Name;
+					thedata.push(datum.TIPS);
+					console.log(thedata);
+				}
+			})
+		).done(function(res)
+		{
+			for (let i = -1; i <= thedata.length; ++i){
+				datum = eval(thedata[0]);
+				console.log(datum);
+				if (i == -1){
+					usr_beg = "Stacy_Butler";
+					$("#content").html("<h1 class=\"h5\">Seeing info for player <i>"+usr_beg+":</i></h1><br><br><strong>Tips regarding your game:</strong><div class=\"row\"><div class=\"col-md-12\"><ul class=\"text-center\" style=\"list-style-position: inside; vertical-align: middle;\">");
+				} else {
+					$("#content").append("<li>"+datum[i]+"</li>");
+				}
+			 }
+			 $("#content").append("</ul></div></div>");
+		});
+    });
+
+	$( "#sandw" ).click(function() {
+		var limit = 1;
+		var usr;
+		var thedatatop = [];
+		var thedatanoob = [];
+		$.when(
+			d3.csv("info.csv", function(datum, index) {
+				if (index < limit){
+					usr = datum.Name;
+					thedatatop.push(datum.top);
+					thedatanoob.push(datum.noob);
+				}
+			})
+		).done(function(res)
+		{
+			datumtop = eval(thedatatop[0]);
+			console.log(datumtop);
+			for (let i = -1; i < datumtop.length; ++i){
+				if (i == -1){
+					$("#content").html("<h1 class=\"h5\">Seeing info for player <i>"+usr+":</i></h1><br><br><strong>You nail it with:</strong><div class=\"row\"><div class=\"col-md-12\"><ul class=\"text-center\" style=\"list-style-position: inside; vertical-align: middle;\">");
+				} else {
+					$("#content").append("<li>"+datumtop[i]+"</li>");
+				}
+			 }
+			 $("#content").append("</ul></div></div>");
+			 
+			datumnoob = eval(thedatanoob[0]);
+;			for (let i = -1; i < datumnoob.length; ++i){
+				if (i == -1){
+					$("#content").append("<br><br><strong>You should improve at:</strong><div class=\"row\"><div class=\"col-md-12\"><ul class=\"text-center\" style=\"list-style-position: inside; vertical-align: middle;\">");
+				} else {
+					$("#content").append("<li>"+datumnoob[i]+"</li>");
+				}
+			 }
+			 $("#content").append("</ul></div></div>");
+			
+		});
+    });	
+		
+	$("#content").html("<canvas id=\"radarChart\"></canvas>");
+	
+	var datasetValue = [];
+	var bgColors = ['rgba(255, 0, 0, .1)', 'rgba(255, 255, 0, .1)', 'rgba(0, 255, 255, .1)', 'rgba(0, 0, 255, .1)', 'rgba(255, 0, 255, .1)',
+'rgba(128, 128, 128, .1)', 'rgba(128, 255, 0, .1)', 'rgba(0, 0, 0, .1)', 'rgba(255, 128, 0, .1)', 'rgba(127, 0, 255, .1)', 'rgba(0, 102, 0, .1)'];
+	
+	var limit = 3;
+	$.when(
+		d3.csv("spider2.csv", function(datum, index) {
+			if (index < limit){
+				datasetValue[index] = {
+					  backgroundColor: bgColors[index],
+					  borderColor: [
+						'rgba(200, 99, 132, .7)',
+					  ],
+					  borderWidth: 2,
+					fillColor: 'rgba(220,220,220,0.5)',
+					strokeColor :'rgba(220,220,220,1)',
+					title : datum.Name,
+					label : datum.Name,
+					data : [datum.OffRating, datum.DefRating, datum['Backstab rating'], datum['Back defense rating'], datum['Electronics Control'], datum.Accuracy]
+				}
+			}
+		})
+	).done(function(res)
+	{
+		  var ctxR = document.getElementById("radarChart").getContext('2d');
+		  var myRadarChart = new Chart(ctxR, {
+			type: 'radar',
+			data: {
+			  labels: ["OffRating", "DefRating", "Backstab rating", "Back defense rating", "Electronics Control", "Accuracy"],
+			  datasets: datasetValue
+			},
+			options: {
+			  responsive: true,
+				labels: {
+					// This more specific font property overrides the global property
+					defaultFontSize: 18
+				}
+			}
+		});
+	});
+	</script>
+</body>
+</html>
