@@ -17,7 +17,6 @@
     <script src="https://d3js.org/d3.v5.min.js"></script>
   <style type="text/css">/* Chart.js */
 @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}</style></head>
-
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Dashboard</a>
@@ -78,13 +77,24 @@
 		<strong><p>Last played games:</p></strong>
           <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
           <div id="chart_div"></div>
-		  <br>
-		  <div id="table_id">
+      <br>
+      
+        <script>
+          count = 0;
+     	d3.csv("dashboard_info.csv", function(datum) {
+        count = count + 1;
+        document.getElementById('g'+count).innerHTML = datum.Game_number 
+        document.getElementById('p'+count).innerHTML = datum.Position
+        document.getElementById('s'+count).innerHTML = datum.score
+
+      })
+      </script>
+		  <div id="table2_id">
 			<table class="table">
 			  <thead class="thead-dark">
 				<tr>
 				  <th scope="col">#</th>
-				  <th scope="col">Event</th>
+				  <th scope="col">Game ID</th>
 				  <th scope="col">Position</th>
 				  <th scope="col">Score</th>
 				</tr>
@@ -92,33 +102,33 @@
 			  <tbody>
 				<tr>
 				  <th scope="row">1</th>
-				  <td>Game 1</td>
-				  <td>8</td>
-				  <td>0.3</td>
+				  <td id = 'g1'></td>
+				  <td id = 'p1'></td>
+				  <td id = 's1'></td>
 				</tr>
 				<tr>
 				  <th scope="row">2</th>
-				  <td>Game 2</td>
-				  <td>7</td>
-				  <td>0.5</td>
+				  <td id = 'g2'></td>
+				  <td id = 'p2'></td>
+				  <td id = 's2'></td>
 				</tr>
 				<tr>
 				  <th scope="row">3</th>
-				  <td>Game 3</td>
-				  <td>4</td>
-				  <td>0.65</td>
+				  <td id = 'g3'></td>
+				  <td id = 'p3'></td>
+				  <td id = 's3'></td>
 				</tr>
 				<tr>
 				  <th scope="row">4</th>
-				  <td>Game 4</td>
-				  <td>1</td>
-				  <td>0.9</td>
+				  <td id = 'g4'></td>
+				  <td id = 'p4'></td>
+				  <td id = 's4'></td>
 				</t>
 				<tr>
 				  <th scope="row">5</th>
-				  <td>Game 5</td>
-				  <td>2</td>
-				  <td>0.75</td>
+				  <td id = 'g5'></td>
+				  <td id = 'p5'></td>
+				  <td id = 's5'></td>
 				</tr>
 			  </tbody>
 			</table>
